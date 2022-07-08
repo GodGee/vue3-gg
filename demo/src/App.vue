@@ -7,6 +7,13 @@
   <computed-component></computed-component>
   <watch-effect-component></watch-effect-component>
   <readonly-component></readonly-component>
+  <props-test
+    v-model="model"
+    :name="refName"
+    :user="retUser"
+    :attrs1="retUser"
+  ></props-test>
+  父组件基础类型{{ model }} 父组件引用类型{{ retUser }}
 </template>
 
 <script>
@@ -17,7 +24,8 @@ import ToRefsComponent from "./components/ToRefsComponent.vue";
 import ComputedComponent from "./components/ComputedComponent.vue";
 import WatchEffectComponent from "./components/WatchEffectComponent.vue";
 import ReadonlyComponent from "./components/ReadonlyComponent.vue";
-
+import PropsTest from "./components/propsTest.vue";
+import { ref, reactive } from "vue";
 export default {
   name: "App",
   components: {
@@ -28,13 +36,18 @@ export default {
     ComputedComponent,
     WatchEffectComponent,
     ReadonlyComponent,
+    PropsTest,
   },
   setup() {
     const state = {
       title: "vue3.0 demo",
     };
-
-    return { state };
+    const model = ref("aa");
+    const refName = ref(0);
+    const retUser = reactive({
+      name: "gg",
+    });
+    return { state, model, refName, retUser };
   },
 };
 </script>
